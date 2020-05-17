@@ -2,6 +2,7 @@
 
 namespace UiBuilder\Layout;
 
+use UiBuilder\Layout\View\Layout;
 use Illuminate\Support\ServiceProvider;
 
 class LayoutServiceProvider extends ServiceProvider
@@ -15,7 +16,10 @@ class LayoutServiceProvider extends ServiceProvider
          * Optional methods to load your package assets
          */
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'layout');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'layout');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'layout');
+        $this->loadViewComponentsAs('', [
+            Layout::class,
+        ]);
         // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         // $this->loadRoutesFrom(__DIR__.'/routes.php');
 
@@ -54,7 +58,7 @@ class LayoutServiceProvider extends ServiceProvider
 
         // Register the main class to use with the facade
         $this->app->singleton('layout', function () {
-            return new Layout;
+            return new \UiBuilder\Layout\Layout;
         });
     }
 }
